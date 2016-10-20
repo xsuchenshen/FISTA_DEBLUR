@@ -1,0 +1,34 @@
+This implementation contain 3 source code files and input data files.
+
+------------- fista_deblur.cpp -------------
+In order to load image, I used OpenCV to read and write image.
+If your have installed OpenCV and use Linux, you can compile using the following command:
+
+'g++ fista_deblur.cpp -o fista_deblur `pkg-config opencv --cflags --libs` -O3 -std=c++11'
+
+and run:
+
+'./fista_deblur'
+
+
+------------- fista_deblur_no_img_acc.cpp -------------
+This code is used for performance evaluation purpose in case that you do not have OpenCV installed,
+I created image with random values and used OpenACC to accelerate the program.
+To compile, use:
+
+'pgc++ fista_deblur_no_img_acc.cpp -o out -O3 -acc -ta=nvidia -Minfo=accel -lm --c++11'
+
+and run:
+
+'./out <NumOfRows> <NumOfCols> <NumOfIterations>'
+
+------------- fista_deblur_no_img_acc.cpp -------------
+This code is used for performance evaluation purpose in case that you do not have OpenCV installed,
+I created image with random values and used OpenMP to accelerate the program.
+To compile, use:
+
+'pgc++ fista_deblur_no_img_acc.cpp -o out -O3 -mp -lm --c++11'
+
+and run:
+
+'./out <NumOfRows> <NumOfCols> <NumOfIterations> <NumOfThreads>'
